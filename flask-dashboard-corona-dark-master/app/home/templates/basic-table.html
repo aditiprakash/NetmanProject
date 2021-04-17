@@ -362,13 +362,15 @@
                   </thead>
                   <tbody>
                     {% for iface in interfaces %}
+                    {% set i = 1 %}
                     <tr>
-                      <td> 1 </td>
-                      <td> {{ iface[0] }} </td>
-                      <td> {{ iface[1] }} </td>
-                      <td> {{ iface[2] }} </td>
-                      <td> Up </td>
+                      <td class="text-info"> {{ i }} </td>
+                      <td class="text-info"> {{ iface[0] }} </td>
+                      <td class="text-info"> {{ iface[1] }} </td>
+                      <td class="text-info"> {{ iface[2] }} </td>
+                      <td class="text-info"> Up </td>
                     </tr>
+                    {% set i = i+1 %}
                     {% endfor %}
                     <!-- <tr>
                       <td> 4 </td>
