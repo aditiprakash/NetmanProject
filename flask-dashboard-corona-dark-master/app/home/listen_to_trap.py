@@ -5,26 +5,21 @@ except:
 try:
     import smtplib
 except:
-    print("Please install smtplib first.")
+    print("Install smtplib first.")
 try:
     import sys
 except:
-    print("Please install sys first.")
+    print("Install sys first.")
 
 
 serverSocket = socket(AF_INET,SOCK_DGRAM)
 trapPort = 162
-
 serverSocket.bind(("198.51.100.2",trapPort))
-# serverSocket.listen(1)
 
 while True:
-    print("Server is ready.")
-    # connectionSocket,addr = serverSocket.accept()
+    print("SNMP server is ready to listen to trap messages.")
     text = serverSocket.recvfrom(1024)
     addr = text[1]
-    # send email notification
-    # text = str(text, encoding='utf-8')
     subject = 'Trap Alert from '+addr[0]
     username = 'wdtcnetman21@gmail.com'
     password = 'Netman123'
@@ -37,4 +32,3 @@ while True:
     server.sendmail(fromaddr, toaddrs, message)
     server.quit()
     print('A trap alert is sent.')
-    # connectionSocket.close()
