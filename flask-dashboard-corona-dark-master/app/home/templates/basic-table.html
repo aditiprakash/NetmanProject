@@ -361,21 +361,15 @@
                     </tr>
                   </thead>
                   <tbody>
+                    {% for iface in interfaces %}
                     <tr>
                       <td> 1 </td>
-                      <td> {{ router }} </td>
-                      <td> {{ values }} </td>
-                      <td> May 15, 2015 </td>
+                      <td> {{ iface[0] }} </td>
+                      <td> {{ iface[1] }} </td>
+                      <td> {{ iface[2] }} </td>
                       <td> Up </td>
                     </tr>
-                    <tr>
-                      <td> 2 </td>
-                      <td> Messsy Adam </td>
-                      <td> $245.30 </td>
-                      <td> July 1, 2015 </td>
-                      <td> Down </td>
-                    </tr>
-                
+                    {% endfor %}
                     <!-- <tr>
                       <td> 4 </td>
                       <td> Peter Meggik </td>

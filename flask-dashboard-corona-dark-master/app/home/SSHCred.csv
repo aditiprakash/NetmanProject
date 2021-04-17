@@ -1,0 +1,6 @@
+router,ip,username,password
+R1,198.51.100.11,lab,asdf
+R2,198.51.100.12,lab,asdf
+R3,198.51.100.13,lab,asdf
+R4,198.51.100.14,lab,asdf
+R5,198.51.100.15,lab,asdf

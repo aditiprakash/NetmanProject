@@ -8,6 +8,7 @@ from flask import render_template, redirect, url_for, request
 from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
+from app.home.routerconfig import * 
 
 @blueprint.route('/index')
 @login_required
@@ -22,7 +23,16 @@ def route_template(router,template):
     try:
 
         if "basic-table" in template:
-            return render_template("basic-table.html",values = "198.51.10.1", router=router)
+            interfaces = getInterfaces(router)
+            intList = list()
+            for iface in interfaces.keys():
+              tempList = list()
+              tempList.append(iface)
+              tempList.append(list(interfaces[iface]['ipv4'].keys())[0])
+              tempList.append(list(list(interfaces[iface]['ipv4'].values())[0].values())[0])
+              intList.append(tempList)
+            return render_template("basic-table.html", interfaces=intList)
+
         if not template.endswith( '.html' ):
             template += '.html'
 
