@@ -1,0 +1,11 @@
+hostname,username,user_priv,password,ospf_network,ospf_mask,AS_NUMBER,loopback
+Core_1,lab123,15,lab123,10.0.0.0,0.0.0.255,65001,
+Core_2,lab123,15,lab123,10.0.0.0,0.0.0.255,65001
+Internal_1,lab123,15,lab123,10.0.0.0,0.0.0.255,65001
+Internal_2,lab123,15,lab123,10.0.0.0,0.0.0.255,65001
+Internal_3,lab123,15,lab123,10.0.0.0,0.0.0.255,65001
+Internal_4,lab123,15,lab123,10.0.0.0,0.0.0.255,65001
+Edge_1,lab123,15,lab123,10.0.0.0,0.0.0.255,65001
+Edge_2,lab123,15,lab123,10.0.0.0,0.0.0.255,65001
+Edge_3,lab123,15,lab123,10.0.0.0,0.0.0.255,65001
+Edge_4,lab123,15,lab123,10.0.0.0,0.0.0.255,65001

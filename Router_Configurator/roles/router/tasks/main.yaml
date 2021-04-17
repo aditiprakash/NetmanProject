@@ -1,0 +1,11 @@
+- name: Generate Core Config Files
+  template: src=core.j2 dest=/home/netman/Desktop/Lab_10/{{item.hostname}}.txt
+  with_items: "{{ Core_routers }}"
+
+- name: Generate Internal Config Files
+  template: src=internal.j2 dest=/home/netman/Desktop/Lab_10/{{item.hostname}}.txt
+  with_items: "{{ Internal_routers }}"
+
+- name: Generate Edge Config Files
+  template: src=edge.j2 dest=/home/netman/Desktop/Lab_10/{{item.hostname}}.txt
+  with_items: "{{ Edge_routers }}"
