@@ -25,6 +25,8 @@ def route_template(router,template):
         if "basic-table" in template:
             interfaces = getInterfaces(router)
             intList = list()
+            if not bool(interfaces):
+              return render_template("basic-table.html", interfaces=[['test', 'test', 'test']])
             for iface in interfaces.keys():
               tempList = list()
               tempList.append(iface)

@@ -39,6 +39,7 @@ def getCredentials():
     return cred
 
 def getInterfaces(routerName):
+    interface = None
     try:
       dev = getCredentials()[routerName]
       dev.open()
