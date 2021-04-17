@@ -1,0 +1,5 @@
+- name: Generate Router Config Files
+  hosts: localhost
+
+  roles:
+    - router
