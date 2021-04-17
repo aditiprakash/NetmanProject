@@ -1,3 +1,4 @@
+# make sure you run it using sudo
 try:
     from socket import *
 except:
