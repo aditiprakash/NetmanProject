@@ -15,12 +15,14 @@ def index():
 
     return render_template('index.html', segment='index')
 
-@blueprint.route('/<template>')
+@blueprint.route('/<router>/<template>')
 @login_required
-def route_template(template):
+def route_template(router,template):
 
     try:
 
+        if "basic-table" in template:
+            return render_template("basic-table.html",values = "198.51.10.1", router=router)
         if not template.endswith( '.html' ):
             template += '.html'
 
