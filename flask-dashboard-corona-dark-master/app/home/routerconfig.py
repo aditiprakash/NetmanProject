@@ -17,7 +17,7 @@ driver = napalm.get_network_driver("ios")
 
 def getCredentials():
   cred = dict()
-  filename = 'SSHCred.csv'
+  filename = 'app/home/SSHCred.csv'
   try:
     with open(filename) as csvfile:
       reader = csv.DictReader(csvfile)
@@ -36,15 +36,20 @@ def getCredentials():
       return cred
   except Exception as e:
     print(f"File not found: \n{e}")
+    # raise e
     return cred
 
 def getInterfaces(routerName):
-    interface = None
+    interfaces = None
     try:
       dev = getCredentials()[routerName]
       dev.open()
       interfaces = dev.get_interfaces_ip()
       dev.close()
+    
+    except KeyError:
+      pass
+
     except Exception as e:
       print(f"Unable to fetch interfaces: \n{e}")
       pass

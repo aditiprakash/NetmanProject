@@ -8,6 +8,7 @@ interface {{ int.interface }}
  description {{ int.description }}
  ip address {{ int.v4_address}} {{ int.mask }}
  no shut
+ mpls ip
 {% endfor %}
 
 
@@ -21,7 +22,12 @@ neighbor {{ bgp.neighbor }} {{ bgp.remote_as }}
 
 
 mpls ip
+mpls label protocol ldp
 ip cef
+
+smnp-server host 198.51.100.2 version 2c
+snmp-server community public rw
+snmp-server enable traps
 
 line vty 0 4
 transport input ssh
