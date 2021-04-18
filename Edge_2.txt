@@ -1,0 +1,42 @@
+hostname Edge_2
+
+username lab123 privilage 15 password lab123
+
+interface Loopback0
+ description Router_ID
+ ip address 1.1.1.5 255.255.255.255
+ no shut
+interface fa0/0
+ description Management_Port
+ ip address 192.168.0.5 255.255.255.0
+ no shut
+interface fa1/0
+ description Link_to_Customer
+ ip address  255.255.255.252
+ no shut
+interface fa1/1
+ description Link_to_Internal1
+ ip address 10.0.0.10 255.255.255.252
+ no shut
+interface fa2/0
+ description Link_to_Internal2
+ ip address 10.0.0.18 255.255.255.252
+ no shut
+
+
+
+
+router ospf 1
+network 10.0.0.0 0.0.0.255
+
+router bgp 65001
+neighbor  2
+neighbor 1.1.1.1 65001
+neighbor 1.1.1.4 65001
+
+mpls ip
+ip cef
+
+line vty 0 4
+transport input ssh
+login local

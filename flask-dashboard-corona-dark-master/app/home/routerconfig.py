@@ -47,6 +47,7 @@ def getInterfaces(routerName):
       dev.close()
     except Exception as e:
       print(f"Unable to fetch interfaces: \n{e}")
+      pass
     return interfaces
 
 
