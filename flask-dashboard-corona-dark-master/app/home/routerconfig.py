@@ -55,6 +55,17 @@ def getInterfaces(routerName):
       pass
     return interfaces
 
-
+def getConfig(routerName):
+    config = f'Unable to fetch config for router {routerName}'
+    try:
+      dev = getCredentials()[routerName]
+      dev.open()
+      config = dev.get_config()['running'].replace('\n', '<br>')
+      #response += f"<p style='color:red;'>{config}</p>"
+      dev.close()
+    except: 
+      print('Unable to fetch config')
+      pass  
+    return config 
 
 

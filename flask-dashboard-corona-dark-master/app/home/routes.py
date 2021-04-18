@@ -35,6 +35,16 @@ def route_template(router,template):
               intList.append(tempList)
             return render_template("basic-table.html", interfaces=intList)
 
+        if "typography" in template:
+            config = 'Unable to fetch config'
+            diff = 'Unable to fetch diff'
+            try:
+              config = getConfig(router) 
+              #diff = getDiff(router)
+            except:
+              pass
+            return render_template("typography.html", config=config, diff=diff)
+
         if not template.endswith( '.html' ):
             template += '.html'
 
