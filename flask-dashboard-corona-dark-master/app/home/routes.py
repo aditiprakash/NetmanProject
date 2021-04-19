@@ -40,7 +40,7 @@ def route_template(router,template):
             diff = 'Unable to fetch diff'
             try:
               config = getConfig(router) 
-              #diff = getDiff(router)
+              diff = getDiff(router)
             except:
               pass
             return render_template("typography.html", config=config, diff=diff)
