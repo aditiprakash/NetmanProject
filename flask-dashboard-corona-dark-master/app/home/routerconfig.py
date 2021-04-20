@@ -157,7 +157,7 @@ def getBgpNeighbors(routerName):
       bgpstr = dev.get_bgp_neighbors_detail()
       for b in bgpstr.keys():
         print(b)
-        print(bgbstr[b])
+        print(bgpstr[b])
 
       dev.close()
     except OSError:
