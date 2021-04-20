@@ -32,6 +32,7 @@ interface fa1/0
 
 router ospf 1
 network 10.0.0.0 0.0.0.255 area 0
+network 1.1.1.0 0.0.0.255 area 0
 
 router bgp 65001
 neighbor 1.1.1.4 remote-as 65001

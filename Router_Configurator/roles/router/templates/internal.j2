@@ -13,6 +13,7 @@ interface {{ int.interface }}
 
 router ospf 1
 network {{ item.ospf_network }} {{ item.ospf_mask }} area 0
+network 1.1.1.0 0.0.0.255 area 0
 
 mpls ip
 mpls label protocol ldp

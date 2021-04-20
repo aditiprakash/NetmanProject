@@ -33,6 +33,7 @@ interface fa2/0
 
 router ospf 1
 network 10.0.0.0 0.0.0.255 area 0
+network 1.1.1.0 0.0.0.255 area 0
 
 router bgp 65001
 neighbor 11.1.1.14 remote-as 2
@@ -43,7 +44,7 @@ mpls ip
 mpls label protocol ldp
 ip cef
 ip scp server enable
-smnp-server host 198.51.100.2 version 2c
+snmp-server host 198.51.100.2 version 2c
 snmp-server community public rw
 snmp-server enable traps
 

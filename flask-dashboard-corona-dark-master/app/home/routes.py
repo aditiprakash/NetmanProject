@@ -120,6 +120,11 @@ def bgtest(router):
     print("Worked!!")
     return render_template("page-500.html")
 
+@blueprint.route('/deploy')
+def deploy():
+    diff = commit_all()
+    print("Worked!!")
+    return render_template("page-500.html")
 # Helper - Extract current page name from request 
 def get_segment( request ): 
 

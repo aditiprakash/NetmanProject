@@ -120,7 +120,15 @@ def commitDiff(routerName):
       pass  
     return 1
 
-
+def commit_all():
+    try:
+      for routerName in filenames.keys():
+        if commitDiff(routerName) != 1:
+          return 0
+    except Exception as e:
+      print("Unable to commit all diffs: \n{e}")
+    return 1
+    
 
 def getOspfNeighbors(routerName):
     nList = list()
