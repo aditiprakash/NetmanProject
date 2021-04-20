@@ -5,7 +5,8 @@ $(function () {
    */
   'use strict';
   var dataset = {
-    labels: ["0", "20", "40", "60", "80", "100"],
+    labels: labels,
+    // labels: ["0", "20", "40", "60", "80", "100"],
     datasets: [{
       label: '# of Votes',
       data: info,
@@ -123,7 +124,8 @@ $(function () {
   //   }
   // };
   var areaData = {
-    labels:  ["0", "20", "40", "60", "80", "100"],
+    labels: labels,
+    // labels:  ["0", "20", "40", "60", "80", "100"],
     datasets: [{
       label: '# of Votes',
       // data: [{% for item in info %}
