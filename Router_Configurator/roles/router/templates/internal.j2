@@ -17,7 +17,7 @@ network {{ item.ospf_network }} {{ item.ospf_mask }}
 mpls ip
 mpls label protocol ldp
 ip cef
-
+ip scp server enable
 smnp-server host 198.51.100.2 version 2c
 snmp-server community public rw
 snmp-server enable traps
