@@ -119,11 +119,8 @@ def commitDiff(routerName):
       pass  
     return diff_comm
 
-def testthis():
-  print("I worked!!")
-  return 1
 
-  
+
 def getOspfNeighbors(routerName):
     nList = list()
     errormsg = f'Unable to fetch OSPF Neighbors for router {routerName}'

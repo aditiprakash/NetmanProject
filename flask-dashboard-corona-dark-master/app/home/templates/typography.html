@@ -392,9 +392,9 @@
     $(function() {
       $('a#test').on('click', function(e) {
         e.preventDefault()
-        $.getJSON('/bgtest',
-            function(data) {
-              console.log("inside")
+        $.getJSON('/{{router}}/bgtest',
+            function() {
+              // console.log("inside")
           //do nothing
         });
         return false;
