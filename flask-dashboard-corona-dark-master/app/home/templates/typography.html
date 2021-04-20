@@ -381,11 +381,26 @@
       </div> -->
     </div>
     <div class="col text-center">
-      <button type="button" class="btn btn-inverse-success btn-fw">Success</button>
-
+      <form>
+      <a href=# id=test><button type="button" class="btn btn-inverse-success btn-fw">Success</button></a>
+    </form>
     </div>
   </div>
 
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type=text/javascript>
+    $(function() {
+      $('a#test').on('click', function(e) {
+        e.preventDefault()
+        $.getJSON('/bgtest',
+            function(data) {
+              console.log("inside")
+          //do nothing
+        });
+        return false;
+      });
+    });
+</script>
 {% endblock content %}
 
 <!-- Specific Plugin JS goes HERE  -->

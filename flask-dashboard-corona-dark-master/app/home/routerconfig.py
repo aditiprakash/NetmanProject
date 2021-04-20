@@ -98,3 +98,6 @@ def getDiff(routerName):
       pass  
     return diff 
 
+def testthis():
+  print("I worked!!")
+  return 1

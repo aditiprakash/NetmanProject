@@ -9,12 +9,19 @@ from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
 from app.home.routerconfig import * 
+import pandas
 
 @blueprint.route('/index')
 @login_required
 def index():
 
     return render_template('index.html', segment='index')
+
+# @blueprint.route('/bgtest')
+# def bgtest():
+#     testthis()
+#     return render_template("index.html", segment='index')
+
 
 @blueprint.route('/<router>/<template>')
 @login_required
@@ -45,6 +52,34 @@ def route_template(router,template):
               pass
             return render_template("typography.html", config=config, diff=diff)
 
+
+        if "chartjs" in template:
+            # print(router, type(router))
+            index = int(router[1])
+            # print(index)
+            colnames = ['R1','R2','R3','R4','R5']
+            data = pandas.read_csv('app/home/cpu.csv',header=1,names=colnames)
+              
+            list_cpu_list = list()
+            list_cpu_list.append(data.R1.tolist())
+            list_cpu_list.append(data.R2.tolist())
+            list_cpu_list.append(data.R3.tolist())
+            list_cpu_list.append(data.R4.tolist())
+            list_cpu_list.append(data.R5.tolist())
+            # replace with list for R6 -> temporary list is R1
+            list_cpu_list.append(data.R1.tolist())
+
+            data = list_cpu_list[index-1]
+            # print(type(data))
+            return render_template("chartjs.html", info=data)
+
+
+        if "bgtest" in template:
+            print(testthis())
+            print("whyyy")
+            return render_template("page-500.html")
+
+
         if not template.endswith( '.html' ):
             template += '.html'
 
@@ -74,3 +109,5 @@ def get_segment( request ):
 
     except:
         return None  
+
+
