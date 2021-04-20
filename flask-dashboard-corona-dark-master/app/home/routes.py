@@ -23,17 +23,37 @@ def route_template(router,template):
     try:
 
         if "basic-table" in template:
+            test = ['test', 'test', 'test', 'test', 'test', 'test']
+            intList = list() 
+            oneighborList = list() 
+            bneighborList = list() 
+
             interfaces = getInterfaces(router)
-            intList = list()
-            if not bool(interfaces):
-              return render_template("basic-table.html", interfaces=[['test', 'test', 'test']])
             for iface in interfaces.keys():
               tempList = list()
               tempList.append(iface)
               tempList.append(list(interfaces[iface]['ipv4'].keys())[0])
               tempList.append(list(list(interfaces[iface]['ipv4'].values())[0].values())[0])
               intList.append(tempList)
-            return render_template("basic-table.html", interfaces=intList)
+            if not bool(interfaces):
+              intList = [test, test, test]
+
+            try:
+              oneighborList = getOspfNeighbors(router)
+            except Exception as e:
+              print(f'Unable to fetch ospf neighbors: \n{e}')
+
+            try:
+              bneighborList = getBgpNeighbors(router)
+            except Exception as e:
+              print(f'Unable to fetch ospf neighbors: \n{e}')
+
+            return render_template(
+                "basic-table.html", 
+                interfaces=intList, 
+                oneighbors=oneighborList,
+                bneighbors=bneighborList,
+            )
 
         if "typography" in template:
             config = 'Unable to fetch config'
