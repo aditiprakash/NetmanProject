@@ -1,4 +1,4 @@
-$(function (info) {
+$(function () {
   /* ChartJS
    * -------
    * Data and config for chartjs
@@ -8,7 +8,14 @@ $(function (info) {
     labels: ["0", "20", "40", "60", "80", "100"],
     datasets: [{
       label: '# of Votes',
+<<<<<<< HEAD
       data: [{% for item in info %} {{item}} {% endfor %}],
+=======
+    //   data: [{% for item in info %}
+    //   {{item}}
+    // {% endfor %}] ,
+      data: '{{ info }}',
+>>>>>>> 7e55426415ffd6c49b276ebad14c453ac8bee2ce
       // data: info,
       // data: [1, 1, 0, 0, 2, 0, 4, 0, 5, 0, 0, 6, 0, 3, 0, 3, 2, 1],
       backgroundColor: [
@@ -128,9 +135,12 @@ $(function (info) {
     labels:  ["0", "20", "40", "60", "80", "100"],
     datasets: [{
       label: '# of Votes',
-      // data: {{ info | tojson }},
+      // data: [{% for item in info %}
+      //   {{item}}
+      // {% endfor %}] ,
+      data: '{{ info }}',
       // data: info,
-      data: [1, 1, 0, 0, 2, 0, 4, 0, 5, 0, 0, 6, 0, 3, 0, 3, 2, 1],
+      // data: [1, 1, 0, 0, 2, 0, 4, 0, 5, 0, 0, 6, 0, 3, 0, 3, 2, 1],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -180,7 +190,11 @@ $(function (info) {
       data: dataset,
       options: options
     });
+<<<<<<< HEAD
     //console.log(info);
+=======
+    console.log(data);
+>>>>>>> 7e55426415ffd6c49b276ebad14c453ac8bee2ce
   }
 
  

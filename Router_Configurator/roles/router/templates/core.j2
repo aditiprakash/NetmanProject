@@ -1,6 +1,6 @@
 hostname {{ item.hostname }}
 
-username {{ item.username }} privilage {{ item.user_priv }} password {{ item.password }}
+username {{ item.username }} privilege {{ item.user_priv }} password {{ item.password }}
 
 
 {% for int in item.interfaces %}
@@ -24,7 +24,7 @@ neighbor {{ bgp.neighbor }} {{ bgp.remote_as }}
 mpls ip
 mpls label protocol ldp
 ip cef
-
+ip scp server enable
 smnp-server host 198.51.100.2 version 2c
 snmp-server community public rw
 snmp-server enable traps
