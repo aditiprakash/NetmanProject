@@ -36,14 +36,15 @@ def route_template(router,template):
             bneighborList = list() 
 
             interfaces = getInterfaces(router)
+            if not bool(interfaces):
+              intList = [test, test, test]
             for iface in interfaces.keys():
               tempList = list()
               tempList.append(iface)
               tempList.append(list(interfaces[iface]['ipv4'].keys())[0])
               tempList.append(list(list(interfaces[iface]['ipv4'].values())[0].values())[0])
               intList.append(tempList)
-            if not bool(interfaces):
-              intList = [test, test, test]
+           
 
             try:
               oneighborList = getOspfNeighbors(router)
@@ -70,7 +71,7 @@ def route_template(router,template):
               diff = getDiff(router)
             except:
               pass
-            return render_template("typography.html", config=config, diff=diff)
+            return render_template("typography.html", config=config, diff=diff, router = router)
 
 
         if "chartjs" in template:
@@ -94,12 +95,6 @@ def route_template(router,template):
             return render_template("chartjs.html", info=data)
 
 
-        if "bgtest" in template:
-            print(testthis())
-            print("whyyy")
-            return render_template("page-500.html")
-
-
         if not template.endswith( '.html' ):
             template += '.html'
 
@@ -114,6 +109,13 @@ def route_template(router,template):
     
     except:
         return render_template('page-500.html'), 500
+
+
+@blueprint.route('/<router>/bgtest')
+def bgtest(router):
+    diff = commitDiff(router)
+    print("Worked!!")
+    return render_template("page-500.html")
 
 # Helper - Extract current page name from request 
 def get_segment( request ): 
