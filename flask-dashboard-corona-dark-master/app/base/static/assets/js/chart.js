@@ -11,7 +11,7 @@ $(function () {
     //   data: [{% for item in info %}
     //   {{item}}
     // {% endfor %}] ,
-      data: {{ info|tolist }},
+      data: info,
       // data: info,
       // data: [1, 1, 0, 0, 2, 0, 4, 0, 5, 0, 0, 6, 0, 3, 0, 3, 2, 1],
       backgroundColor: [
@@ -134,7 +134,7 @@ $(function () {
       // data: [{% for item in info %}
       //   {{item}}
       // {% endfor %}] ,
-      data: {{ info|tolist }},
+      data: info,
       // data: info,
       // data: [1, 1, 0, 0, 2, 0, 4, 0, 5, 0, 0, 6, 0, 3, 0, 3, 2, 1],
       backgroundColor: [
@@ -189,7 +189,7 @@ $(function () {
       data: data,
       options: options
     });
-    // console.log(info);
+    console.log(data);
   }
 
  
