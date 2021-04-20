@@ -13,12 +13,12 @@
   <div class="content-wrapper">
     <div class="page-header">
       <h3 class="page-title"> Configuration Changes </h3>
-      <nav aria-label="breadcrumb">
+      <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Router 1</a></li>
           <li class="breadcrumb-item active" aria-current="page">Diff</li>
         </ol>
-      </nav>
+      </nav> -->
     </div>
     <div class="row">
       <!-- <div class="col-md-6 grid-margin stretch-card">
@@ -382,7 +382,7 @@
     </div>
     <div class="col text-center">
       <form>
-      <a href=# id=test><button type="button" class="btn btn-inverse-success btn-fw">Success</button></a>
+      <a href=# id=test><button type="button" class="btn btn-success btn-fw">Push Differences</button></a>
     </form>
     </div>
   </div>
@@ -392,7 +392,7 @@
     $(function() {
       $('a#test').on('click', function(e) {
         e.preventDefault()
-        alert("button");
+        alert("Great! Your changes have been pushed.");
 
         $.getJSON('/{{router}}/bgtest',
             function() {

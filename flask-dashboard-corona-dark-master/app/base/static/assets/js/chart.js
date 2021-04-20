@@ -27,7 +27,11 @@ $(function () {
         'rgba(255, 159, 64, 1)'
       ],
       borderWidth: 1,
-      fill: true
+      fill: 
+      {
+        above: 'rgb(255,0,0)'
+      }
+      
     }]
   };
   // var multiLineData = {
@@ -88,34 +92,7 @@ $(function () {
   };
 
   
-  var doughnutPieData = {
-    datasets: [{
-      data: [30, 40, 30],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.5)',
-        'rgba(54, 162, 235, 0.5)',
-        'rgba(255, 206, 86, 0.5)',
-        'rgba(75, 192, 192, 0.5)',
-        'rgba(153, 102, 255, 0.5)',
-        'rgba(255, 159, 64, 0.5)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-    }],
-
-    // These labels appear in the legend and in the tooltips when hovering different arcs
-    labels: [
-      'Pink',
-      'Blue',
-      'Yellow',
-    ]
-  };
+  
   // var doughnutPieOptions = {
   //   responsive: true,
   //   animation: {
@@ -127,7 +104,7 @@ $(function () {
     labels: labels,
     // labels:  ["0", "20", "40", "60", "80", "100"],
     datasets: [{
-      label: '# of Votes',
+      label: 'CPU Utilization (%)',
       // data: [{% for item in info %}
       //   {{item}}
       // {% endfor %}] ,
@@ -135,22 +112,31 @@ $(function () {
       // data: info,
       // data: [1, 1, 0, 0, 2, 0, 4, 0, 5, 0, 0, 6, 0, 3, 0, 3, 2, 1],
       backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+        // 'rgba(255, 99, 132, 0.2)',
+        // 'rgba(54, 162, 23  5, 0.2)',
+        // 'rgba(255, 206, 86, 0.2)',
+        // 'rgba(75, 192, 192, 0.2)',
+        // 'rgba(153, 102, 255, 0.2)',    
+        // 'rgba(255, 159, 64, 0.2)',
+        // 'rgba(75, 192, 192, 0.2)',
+        // 'rgba(153, 102, 255, 0.2)',
+        // 'rgba(255, 159, 64, 0.2)',
+
+        
       ],
       borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
+        // 'rgba(255,99,132,1)',
+        // 'rgba(54, 162, 235, 1)',
+        // 'rgba(255, 206, 86, 1)',
+        // 'rgba(75, 192, 192, 1)',
+        // 'rgba(153, 102, 255, 1)',
+        // 'rgba(255, 159, 64, 1)',
+        // 'rgba(75, 192, 192, 1)',
+        // 'rgba(153, 102, 255, 1)',
+        // 'rgba(255, 159, 64, 1)'
+
       ],
-      borderWidth: 1,
+      borderWidth: 0.8,
       fill: true, // 3: no fill
     }]
   };
@@ -161,6 +147,12 @@ $(function () {
         propagate: true
       }
     },
+    legend: {
+      labels: {
+          fontColor: 'rgba(255, 159, 64, 0.4)',
+          // fontSize: 18
+      }
+  },
     scales: {
       yAxes: [{
         gridLines: {
@@ -180,8 +172,8 @@ $(function () {
     var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
     var lineChart = new Chart(lineChartCanvas, {
       type: 'line',
-      data: dataset,
-      options: options
+      data: areaData,
+      options: areaOptions
     });
 
   }
