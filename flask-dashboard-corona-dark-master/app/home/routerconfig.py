@@ -75,7 +75,6 @@ def getConfig(routerName):
       pass  
     return config 
 
-
 def getDiff(routerName):
     diff = f'Unable to fetch diff for router {routerName}'
     config_file = f"../{filenames[routerName]}" 
@@ -101,3 +100,52 @@ def getDiff(routerName):
 def testthis():
   print("I worked!!")
   return 1
+
+  
+def getOspfNeighbors(routerName):
+    nList = list()
+    errormsg = f'Unable to fetch OSPF Neighbors for router {routerName}'
+    try:
+      dev = getCredentials()[routerName]
+      dev.open()
+
+      ospfstr = dev.cli(['show ip ospf neighbor'])['show ip ospf neighbor']
+      tlist = ospfstr.split('\n')
+      tmmlist = list()
+      for t in tlist[1:]:
+          tmlist = list()
+          for tm in t.split(' '):
+              if not tm == '':
+                  tmlist.append(tm)
+          tmmlist.append(tmlist)
+      nList = tmmlist    
+      dev.close()
+    except OSError:
+      pass
+      dev.close()
+    except Exception as e: 
+      print(f'{errormsg} \n{e}')
+      pass  
+    return nList 
+    
+def getBgpNeighbors(routerName):
+    nList = list()
+    errormsg = f'Unable to fetch BGP Neighbors for router {routerName}'
+    try:
+      dev = getCredentials()[routerName]
+      dev.open()
+
+      bgpstr = dev.get_bgp_neighbors_detail()
+      for b in bgpstr.keys():
+        print(b)
+        print(bgbstr[b])
+
+      dev.close()
+    except OSError:
+      pass
+      dev.close()
+    except Exception as e: 
+      print(f'{errormsg} \n{e}')
+      dev.close()
+      pass  
+    return nList 
