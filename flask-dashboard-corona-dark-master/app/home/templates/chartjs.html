@@ -80,7 +80,10 @@
 
 <!-- Specific Plugin JS goes HERE  -->
 {% block plugin_javascripts %}
-
+  <script type='text/javascript'>
+     var labels = {{ labels }}
+     var info = {{ info }}
+  </script>
   <script src="/static/assets/vendors/chart.js/Chart.min.js"></script>
 
 {% endblock plugin_javascripts %}
@@ -93,6 +96,7 @@
   <script type="text/javascript">
   // var myvar = function({{info}})
   console.log({{info}})
-</script>
+  console.log({{labels}})
+  </script>
 
 {% endblock javascripts %}

@@ -91,8 +91,11 @@ def route_template(router,template):
             list_cpu_list.append(data.R1.tolist())
 
             data = list_cpu_list[index-1]
+            x_max = len(data)
+            time = list(range(x_max))
+            time = [ele * 5 for ele in time]
             # print(type(data))
-            return render_template("chartjs.html", info=data)
+            return render_template("chartjs.html", info=data, labels=time)
 
 
         if not template.endswith( '.html' ):

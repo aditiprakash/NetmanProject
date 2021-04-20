@@ -392,6 +392,8 @@
     $(function() {
       $('a#test').on('click', function(e) {
         e.preventDefault()
+        alert("button");
+
         $.getJSON('/{{router}}/bgtest',
             function() {
               // console.log("inside")
@@ -407,4 +409,8 @@
 {% block plugin_javascripts %}{% endblock plugin_javascripts %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+
+{% endblock javascripts %}
+
+

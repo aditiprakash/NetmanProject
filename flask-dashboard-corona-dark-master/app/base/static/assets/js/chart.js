@@ -4,16 +4,12 @@ $(function () {
    * Data and config for chartjs
    */
   'use strict';
-  var data = {
-    labels: ["0", "20", "40", "60", "80", "100"],
+  var dataset = {
+    labels: labels,
+    // labels: ["0", "20", "40", "60", "80", "100"],
     datasets: [{
       label: '# of Votes',
-    //   data: [{% for item in info %}
-    //   {{item}}
-    // {% endfor %}] ,
-      data: '{{ info }}',
-      // data: info,
-      // data: [1, 1, 0, 0, 2, 0, 4, 0, 5, 0, 0, 6, 0, 3, 0, 3, 2, 1],
+      data: info,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -128,13 +124,14 @@ $(function () {
   //   }
   // };
   var areaData = {
-    labels:  ["0", "20", "40", "60", "80", "100"],
+    labels: labels,
+    // labels:  ["0", "20", "40", "60", "80", "100"],
     datasets: [{
       label: '# of Votes',
       // data: [{% for item in info %}
       //   {{item}}
       // {% endfor %}] ,
-      data: '{{ info }}',
+      data: info,
       // data: info,
       // data: [1, 1, 0, 0, 2, 0, 4, 0, 5, 0, 0, 6, 0, 3, 0, 3, 2, 1],
       backgroundColor: [
@@ -181,15 +178,12 @@ $(function () {
 
   if ($("#lineChart").length) {
     var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
-    // var temp = {{  info  }};
-    // console.log(temp);
-
     var lineChart = new Chart(lineChartCanvas, {
       type: 'line',
-      data: data,
+      data: dataset,
       options: options
     });
-    console.log(data);
+
   }
 
  
