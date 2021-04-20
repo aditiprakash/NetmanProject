@@ -13,18 +13,26 @@ Core_routers:
       mask: 255.255.255.255
     - interface: fa0/0
       description: Management_Port
-      v4_address: 192.168.0.1
+      v4_address: 198.51.100.11
       mask: 255.255.255.0
-    - interface: fa1/0
-      description: Link_to_Internal
+    - interface: fa1/1
+      description: Link_to_Internal1
       v4_address: 10.0.0.1
+      mask: 255.255.255.252
+    - interface: fa2/0
+      description: Link_to_Internal2
+      v4_address: 10.0.0.21
+      mask: 255.255.255.252
+    - interface: fa1/0
+      description: Link_to_External
+      v4_address: 11.1.1.1
       mask: 255.255.255.252
     AS_NUMBER: 65001
     bgp_neighbors:
-    - neighbor: ###
-      remote_as: 1
     - neighbor: 1.1.1.4
       remote_as: 65001
+    - neighbor: 11.1.1.2
+      remote_as: 1
     - neighbor: 1.1.1.5
       remote_as: 65001
 Internal_routers:
@@ -41,7 +49,7 @@ Internal_routers:
       mask: 255.255.255.255
     - interface: fa0/0
       description: Management_Port
-      v4_address: 192.168.0.2
+      v4_address: 198.51.100.12
       mask: 255.255.255.0
     - interface: fa1/0
       description: Link_to_Core
@@ -68,7 +76,7 @@ Internal_routers:
       mask: 255.255.255.255
     - interface: fa0/0
       description: Management_Port
-      v4_address: 192.168.0.3
+      v4_address: 198.51.100.13
       mask: 255.255.255.0
     - interface: fa1/0
       description: Link_to_Core
@@ -96,11 +104,11 @@ Edge_routers:
       mask: 255.255.255.255
     - interface: fa0/0
       description: Management_Port
-      v4_address: 192.168.0.4
+      v4_address: 198.51.100.14
       mask: 255.255.255.0
     - interface: fa1/0
       description: Link_to_Customer
-      v4_address: ####
+      v4_address: 11.1.1.9
       mask: 255.255.255.252
     - interface: fa1/1
       description: Link_to_Internal1
@@ -112,10 +120,10 @@ Edge_routers:
       mask: 255.255.255.252
     AS_NUMBER: 65001
     bgp_neighbors:
-    - neighbor: ###
-      remote_as: 2
     - neighbor: 1.1.1.1
       remote_as: 65001
+    - neighbor: 11.1.1.10
+      remote_as: 2
     - neighbor: 1.1.1.5
       remote_as: 65001
   - hostname: Edge_2
@@ -131,11 +139,11 @@ Edge_routers:
       mask: 255.255.255.255
     - interface: fa0/0
       description: Management_Port
-      v4_address: 192.168.0.5
+      v4_address: 198.51.100.15
       mask: 255.255.255.0
     - interface: fa1/0
       description: Link_to_Customer
-      v4_address: ###
+      v4_address: 11.1.1.13
       mask: 255.255.255.252
     - interface: fa1/1
       description: Link_to_Internal1
@@ -147,7 +155,7 @@ Edge_routers:
       mask: 255.255.255.252
     AS_NUMBER: 65001
     bgp_neighbors:
-    - neighbor: ###
+    - neighbor: 11.1.1.14
       remote_as: 2
     - neighbor: 1.1.1.1
       remote_as: 65001

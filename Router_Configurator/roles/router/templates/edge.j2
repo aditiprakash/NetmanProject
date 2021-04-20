@@ -14,11 +14,11 @@ interface {{ int.interface }}
 
 
 router ospf 1
-network {{ item.ospf_network }} {{ item.ospf_mask }}
+network {{ item.ospf_network }} {{ item.ospf_mask }} area 0
 
 router bgp {{ item.AS_NUMBER }}
 {% for bgp in item.bgp_neighbors %}
-neighbor {{ bgp.neighbor }} {{ bgp.remote_as }}
+neighbor {{ bgp.neighbor }} remote-as {{ bgp.remote_as }}
 {% endfor %}
 
 mpls ip
