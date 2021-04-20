@@ -1,6 +1,6 @@
 hostname {{ item.hostname }}
 
-username {{ item.username }} privilage {{ item.user_priv }} password {{ item.password }}
+username {{ item.username }} privilege {{ item.user_priv }} password {{ item.password }}
 
 {% for int in item.interfaces %}
 interface {{ int.interface }}
