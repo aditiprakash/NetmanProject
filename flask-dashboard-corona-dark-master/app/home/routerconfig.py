@@ -34,9 +34,17 @@ def Is_connected(dev, conn):
     try:
       conn.open()
       conn.close()
+      now = datetime.now()
+      timestr = now.strftime("%c")
     except:
-      return {dev:'Offline'}
-    return {dev:'Active'}
+      return {
+        dev:'Offline',
+        'time': timestr,
+      }
+    return {
+      dev:'Active',
+      'time': timestr,
+    }
    
 def checkHealth():
   devstat = ['Offline', 'Offline', 'Offline', 'Offline', 'Offline']
@@ -58,15 +66,15 @@ def checkHealth():
     print(f"Ooops!! Something went wrong while checking router health\n{e}")
   for d in devstatus:
     if list(d.keys())[0] == 'R1':
-      devstat[0] = d['R1'] 
+      devstat[0] = [d['R1'], d['time']] 
     if list(d.keys())[0] == 'R2':
-      devstat[1] = d['R2'] 
+      devstat[1] = [d['R2'], d['time']] 
     if list(d.keys())[0] == 'R3':
-      devstat[2] = d['R3'] 
+      devstat[2] = [d['R3'], d['time']] 
     if list(d.keys())[0] == 'R4':
-      devstat[3] = d['R4'] 
+      devstat[3] = [d['R4'], d['time']] 
     if list(d.keys())[0] == 'R5':
-      devstat[4] = d['R5'] 
+      devstat[4] = [d['R5'], d['time']] 
   return devstat 
 
 def getCredentials():
