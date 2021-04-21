@@ -11,23 +11,41 @@ from jinja2 import TemplateNotFound
 from app.home.routerconfig import * 
 import pandas
 
+filenames = {
+    'R1': "Core_1.txt",
+    'R2': "Internal_1.txt",
+    'R3': "Internal_2.txt",
+    'R4': "Edge_1.txt",
+    'R5': "Edge_2.txt",
+}
+
 @blueprint.route('/index')
 @login_required
 def index():
     devstatus = checkHealth()
-    R1status = devstatus[0]
-    R2status = devstatus[1]
-    R3status = devstatus[2]
-    R4status = devstatus[3]
-    R5status = devstatus[4]
+    R1status = devstatus[0][0]
+    R1time = devstatus[0][1]
+    R2status = devstatus[1][0]
+    R2time = devstatus[0][1]
+    R3status = devstatus[2][0]
+    R3time = devstatus[0][1]
+    R4status = devstatus[3][0]
+    R4time = devstatus[0][1]
+    R5status = devstatus[4][0]
+    R5time = devstatus[0][1]
     return render_template(
       'index.html', 
       segment='index',
       R1status=R1status, 
+      R1time=R1time,
       R2status=R2status, 
+      R2time=R2time,
       R3status=R3status, 
+      R3time=R3time,
       R4status=R4status, 
+      R4time=R4time,
       R5status=R5status, 
+      R5time=R5time,
     )
 
 # @blueprint.route('/bgtest')
@@ -71,6 +89,7 @@ def route_template(router,template):
 
             return render_template(
                 "basic-table.html", 
+                routerName=filenames[router][:filenames[router].index('.')],
                 interfaces=intList, 
                 oneighbors=oneighborList,
                 bneighbors=bneighborList,
