@@ -3,9 +3,9 @@ hostname Internal_2
 username lab123 privilege 15 password lab123
 
 
-interface Loopback0
- description Router_ID
- ip address 1.1.1.3 255.255.255.255
+interface fa1/0
+ description Link_to_Core
+ ip address 10.0.0.22 255.255.255.252
  no shut
  mpls ip
 interface fa0/0
@@ -13,19 +13,19 @@ interface fa0/0
  ip address 198.51.100.13 255.255.255.0
  no shut
  mpls ip
-interface fa1/0
- description Link_to_Core
- ip address 10.0.0.22 255.255.255.252
+interface fa2/0
+ description Link_to_Edge2
+ ip address 10.0.0.17 255.255.255.252
+ no shut
+ mpls ip
+interface Loopback0
+ description Router_ID
+ ip address 1.1.1.3 255.255.255.255
  no shut
  mpls ip
 interface fa1/1
  description Link_to_Edge1
  ip address 10.0.0.13 255.255.255.252
- no shut
- mpls ip
-interface fa2/0
- description Link_to_Edge2
- ip address 10.0.0.17 255.255.255.252
  no shut
  mpls ip
 

@@ -7,33 +7,100 @@ Core_routers:
     ospf_network: 10.0.0.0
     ospf_mask: 0.0.0.255
     interfaces:
-    - interface: Loopback0
-      description: Router_ID
-      v4_address: 1.1.1.1
-      mask: 255.255.255.255
-    - interface: fa0/0
-      description: Management_Port
-      v4_address: 198.51.100.11
-      mask: 255.255.255.0
-    - interface: fa1/1
-      description: Link_to_Internal1
-      v4_address: 10.0.0.1
-      mask: 255.255.255.252
-    - interface: fa2/0
-      description: Link_to_Internal2
-      v4_address: 10.0.0.21
-      mask: 255.255.255.252
     - interface: fa1/0
       description: Link_to_External
       v4_address: 11.1.1.1
       mask: 255.255.255.252
+    - interface: fa0/0
+      description: Management_Port
+      v4_address: 198.51.100.11
+      mask: 255.255.255.0
+    - interface: fa2/0
+      description: Link_to_Internal2
+      v4_address: 10.0.0.21
+      mask: 255.255.255.252
+    - interface: Loopback0
+      description: Router_ID
+      v4_address: 1.1.1.1
+      mask: 255.255.255.255
+    - interface: fa1/1
+      description: Link_to_Internal1
+      v4_address: 10.0.0.1
+      mask: 255.255.255.252
     AS_NUMBER: 65001
     bgp_neighbors:
-    - neighbor: 1.1.1.4
-      remote_as: 65001
     - neighbor: 11.1.1.2
       remote_as: 1
     - neighbor: 1.1.1.5
+      remote_as: 65001
+    - neighbor: 1.1.1.4
+      remote_as: 65001
+Edge_routers:
+  - hostname: Edge_1
+    username: lab123
+    user_priv: 15
+    password: lab123
+    ospf_network: 10.0.0.0
+    ospf_mask: 0.0.0.255
+    interfaces:
+    - interface: fa1/0
+      description: Link_to_Customer
+      v4_address: 11.1.1.9
+      mask: 255.255.255.252
+    - interface: fa0/0
+      description: Management_Port
+      v4_address: 198.51.100.14
+      mask: 255.255.255.0
+    - interface: fa2/0
+      description: Link_to_Internal2
+      v4_address: 10.0.0.14
+      mask: 255.255.255.252
+    - interface: Loopback0
+      description: Router_ID
+      v4_address: 1.1.1.4
+      mask: 255.255.255.255
+    - interface: fa1/1
+      description: Link_to_Internal1
+      v4_address: 10.0.0.6
+      mask: 255.255.255.252
+    AS_NUMBER: 65001
+    bgp_neighbors:
+    - neighbor: 11.1.1.10
+      remote_as: 2
+    - neighbor: 1.1.1.1
+      remote_as: 65001
+  - hostname: Edge_2
+    username: lab123
+    user_priv: 15
+    password: lab123
+    ospf_network: 10.0.0.0
+    ospf_mask: 0.0.0.255
+    interfaces:
+    - interface: fa1/0
+      description: Link_to_Customer
+      v4_address: 11.1.1.13
+      mask: 255.255.255.252
+    - interface: fa0/0
+      description: Management_Port
+      v4_address: 198.51.100.15
+      mask: 255.255.255.0
+    - interface: fa2/0
+      description: Link_to_Internal2
+      v4_address: 10.0.0.18
+      mask: 255.255.255.252
+    - interface: Loopback0
+      description: Router_ID
+      v4_address: 1.1.1.5
+      mask: 255.255.255.255
+    - interface: fa1/1
+      description: Link_to_Internal1
+      v4_address: 10.0.0.10
+      mask: 255.255.255.252
+    AS_NUMBER: 65001
+    bgp_neighbors:
+    - neighbor: 11.1.1.14
+      remote_as: 2
+    - neighbor: 1.1.1.1
       remote_as: 65001
 Internal_routers:
   - hostname: Internal_1
@@ -43,25 +110,25 @@ Internal_routers:
     ospf_network: 10.0.0.0
     ospf_mask: 0.0.0.255
     interfaces:
-    - interface: Loopback0
-      description: Router_ID
-      v4_address: 1.1.1.2
-      mask: 255.255.255.255
-    - interface: fa0/0
-      description: Management_Port
-      v4_address: 198.51.100.12
-      mask: 255.255.255.0
     - interface: fa1/0
       description: Link_to_Core
       v4_address: 10.0.0.2
       mask: 255.255.255.252
-    - interface: fa1/1
-      description: Link_to_Edge1
-      v4_address: 10.0.0.5
-      mask: 255.255.255.252
+    - interface: fa0/0
+      description: Management_Port
+      v4_address: 198.51.100.12
+      mask: 255.255.255.0
     - interface: fa2/0
       description: Link_to_Edge2
       v4_address: 10.0.0.9
+      mask: 255.255.255.252
+    - interface: Loopback0
+      description: Router_ID
+      v4_address: 1.1.1.2
+      mask: 255.255.255.255
+    - interface: fa1/1
+      description: Link_to_Edge1
+      v4_address: 10.0.0.5
       mask: 255.255.255.252
   - hostname: Internal_2
     username: lab123
@@ -70,94 +137,23 @@ Internal_routers:
     ospf_network: 10.0.0.0
     ospf_mask: 0.0.0.255
     interfaces:
-    - interface: Loopback0
-      description: Router_ID
-      v4_address: 1.1.1.3
-      mask: 255.255.255.255
-    - interface: fa0/0
-      description: Management_Port
-      v4_address: 198.51.100.13
-      mask: 255.255.255.0
     - interface: fa1/0
       description: Link_to_Core
       v4_address: 10.0.0.22
       mask: 255.255.255.252
-    - interface: fa1/1
-      description: Link_to_Edge1
-      v4_address: 10.0.0.13
-      mask: 255.255.255.252
+    - interface: fa0/0
+      description: Management_Port
+      v4_address: 198.51.100.13
+      mask: 255.255.255.0
     - interface: fa2/0
       description: Link_to_Edge2
       v4_address: 10.0.0.17
       mask: 255.255.255.252
-Edge_routers:
-  - hostname: Edge_1
-    username: lab123
-    user_priv: 15
-    password: lab123
-    ospf_network: 10.0.0.0
-    ospf_mask: 0.0.0.255
-    interfaces:
     - interface: Loopback0
       description: Router_ID
-      v4_address: 1.1.1.4
+      v4_address: 1.1.1.3
       mask: 255.255.255.255
-    - interface: fa0/0
-      description: Management_Port
-      v4_address: 198.51.100.14
-      mask: 255.255.255.0
-    - interface: fa1/0
-      description: Link_to_Customer
-      v4_address: 11.1.1.9
-      mask: 255.255.255.252
     - interface: fa1/1
-      description: Link_to_Internal1
-      v4_address: 10.0.0.6
+      description: Link_to_Edge1
+      v4_address: 10.0.0.13
       mask: 255.255.255.252
-    - interface: fa2/0
-      description: Link_to_Internal2
-      v4_address: 10.0.0.14
-      mask: 255.255.255.252
-    AS_NUMBER: 65001
-    bgp_neighbors:
-    - neighbor: 1.1.1.1
-      remote_as: 65001
-    - neighbor: 11.1.1.10
-      remote_as: 2
-    - neighbor: 1.1.1.5
-      remote_as: 65001
-  - hostname: Edge_2
-    username: lab123
-    user_priv: 15
-    password: lab123
-    ospf_network: 10.0.0.0
-    ospf_mask: 0.0.0.255
-    interfaces:
-    - interface: Loopback0
-      description: Router_ID
-      v4_address: 1.1.1.5
-      mask: 255.255.255.255
-    - interface: fa0/0
-      description: Management_Port
-      v4_address: 198.51.100.15
-      mask: 255.255.255.0
-    - interface: fa1/0
-      description: Link_to_Customer
-      v4_address: 11.1.1.13
-      mask: 255.255.255.252
-    - interface: fa1/1
-      description: Link_to_Internal1
-      v4_address: 10.0.0.10
-      mask: 255.255.255.252
-    - interface: fa2/0
-      description: Link_to_Internal2
-      v4_address: 10.0.0.18
-      mask: 255.255.255.252
-    AS_NUMBER: 65001
-    bgp_neighbors:
-    - neighbor: 11.1.1.14
-      remote_as: 2
-    - neighbor: 1.1.1.1
-      remote_as: 65001
-    - neighbor: 1.1.1.4
-      remote_as: 65001

@@ -34,14 +34,14 @@
                 "mask": "255.255.255.252"
                 }
             },
-            "bgp_neighbors": {
-                "Neighbor_In_1":{
-                    "ID":"1.1.1.4",
-                    "AS":"65001"
-                },
+            "bgp_neighbors":{
                 "Neighbor_Ex":{
                     "ID": "11.1.1.2",
                     "AS": "1"
+                },
+                "Neighbor_In_1":{
+                    "ID":"1.1.1.4",
+                    "AS":"65001"
                 },
                 "Neighbor_In_2":{
                     "ID":"1.1.1.5",
@@ -158,17 +158,13 @@
                 }
             },
             "bgp_neighbors": {
-                "Neighbor_In_1":{
+                "Neighbor_RR":{
                         "ID":"1.1.1.1",
                         "AS":"65001"
                 },
                 "Neighbor_Ex":{
                     "ID":"11.1.1.10",
                     "AS":"2"
-                },
-                "Neighbor_In_2":{
-                        "ID":"1.1.1.5",
-                        "AS":"65001"
                 }
             }         
             
@@ -212,14 +208,10 @@
                         "ID":"11.1.1.14",
                         "AS":"2"
                     },
-                    "Neighbor_In_1":{
+                    "Neighbor_RR":{
                         "ID":"1.1.1.1",
                         "AS":"65001"
-                    },
-                    "Neighbor_In_2":{
-                        "ID":"1.1.1.4",
-                        "AS":"65001"
-                    }    
+                    }  
                 }    
         }
     }

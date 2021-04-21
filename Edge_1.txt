@@ -2,9 +2,9 @@ hostname Edge_1
 
 username lab123 privilege 15 password lab123
 
-interface Loopback0
- description Router_ID
- ip address 1.1.1.4 255.255.255.255
+interface fa1/0
+ description Link_to_Customer
+ ip address 11.1.1.9 255.255.255.252
  no shut
  mpls ip
 interface fa0/0
@@ -12,19 +12,19 @@ interface fa0/0
  ip address 198.51.100.14 255.255.255.0
  no shut
  mpls ip
-interface fa1/0
- description Link_to_Customer
- ip address 11.1.1.9 255.255.255.252
+interface fa2/0
+ description Link_to_Internal2
+ ip address 10.0.0.14 255.255.255.252
+ no shut
+ mpls ip
+interface Loopback0
+ description Router_ID
+ ip address 1.1.1.4 255.255.255.255
  no shut
  mpls ip
 interface fa1/1
  description Link_to_Internal1
  ip address 10.0.0.6 255.255.255.252
- no shut
- mpls ip
-interface fa2/0
- description Link_to_Internal2
- ip address 10.0.0.14 255.255.255.252
  no shut
  mpls ip
 
@@ -34,11 +34,12 @@ interface fa2/0
 router ospf 1
 network 10.0.0.0 0.0.0.255 area 0
 network 1.1.1.0 0.0.0.255 area 0
+redistribute bgp 65001
 
 router bgp 65001
-neighbor 1.1.1.1 remote-as 65001
 neighbor 11.1.1.10 remote-as 2
-neighbor 1.1.1.5 remote-as 65001
+neighbor 1.1.1.1 remote-as 65001
+neighbor 1.1.1.1 update-source loopback0
 
 mpls ip
 mpls label protocol ldp
