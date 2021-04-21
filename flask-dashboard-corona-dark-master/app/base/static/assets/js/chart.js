@@ -170,7 +170,13 @@ $(function () {
         ticks: {
           fontColor: "white",
           fontSize: 12
-        }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'time (s)',
+          fontColor: "white",
+          fontSize: 12
+      }
       }]
     }
   }
