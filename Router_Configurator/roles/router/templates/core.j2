@@ -13,19 +13,24 @@ interface {{ int.interface }}
 
 
 router ospf 1
-network {{ item.ospf_network }} {{ item.ospf_mask }}
+network {{ item.ospf_network }} {{ item.ospf_mask }} area 0
+network 1.1.1.0 0.0.0.255 area 0
+redistribute bgp 65001
 
 router bgp {{ item.AS_NUMBER }}
 {% for bgp in item.bgp_neighbors %}
-neighbor {{ bgp.neighbor }} {{ bgp.remote_as }}
+neighbor {{ bgp.neighbor }} remote-as {{ bgp.remote_as }}
 {% endfor %}
-
+neighbor 1.1.1.4 update-source loopback0
+neighbor 1.1.1.4 route-reflector-client
+neighbor 1.1.1.5 update-source loopback0
+neighbor 1.1.1.5 route-reflector-client
 
 mpls ip
 mpls label protocol ldp
 ip cef
 ip scp server enable
-smnp-server host 198.51.100.2 version 2c
+snmp-server host 198.51.100.2 version 2c
 snmp-server community public rw
 snmp-server enable traps
 

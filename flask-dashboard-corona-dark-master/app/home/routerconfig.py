@@ -85,7 +85,7 @@ def getDiff(routerName):
         diff = diff + f"\nMissing or invalid golden config file" 
         print('Missing or invalid golden config file')
         return diff
-      dev.load_replace_candidate(filename=config_file)
+      dev.load_merge_candidate(filename=config_file)
       diff = dev.compare_config().replace('\n', '<br />')
       #response += f"<p style='color:red;'>{diff}</p>"
       dev.discard_config()
@@ -113,13 +113,22 @@ def commitDiff(routerName):
       dev.commit_config()
       dev.close()
     except OSError:
+      print("OS ERROR")
       pass
     except Exception as e: 
       print(f'Unable to Commit diff: \n{e}')
       pass  
-    return diff_comm
+    return 1
 
-
+def commit_all():
+    try:
+      for routerName in filenames.keys():
+        if commitDiff(routerName) != 1:
+          return 0
+    except Exception as e:
+      print("Unable to commit all diffs: \n{e}")
+    return 1
+    
 
 def getOspfNeighbors(routerName):
     nList = list()

@@ -2,7 +2,7 @@ import json
 import csv
 with open("interfaces.json","r") as json_file:
     routers = json.load(json_file)
-with open('/home/netman/Desktop/Lab_10//roles/router/vars/main.yaml','a+') as f:
+with open('roles/router/vars/main.yaml','a+') as f:
       for i in routers:
         f.write("\n{}_routers:".format(i))
         for x in routers[i]:

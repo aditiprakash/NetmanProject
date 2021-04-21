@@ -1,41 +1,53 @@
 hostname Edge_2
 
-username lab123 privilage 15 password lab123
+username lab123 privilege 15 password lab123
 
-interface Loopback0
- description Router_ID
- ip address 1.1.1.5 255.255.255.255
- no shut
-interface fa0/0
- description Management_Port
- ip address 192.168.0.5 255.255.255.0
- no shut
 interface fa1/0
  description Link_to_Customer
- ip address  255.255.255.252
+ ip address 11.1.1.13 255.255.255.252
  no shut
-interface fa1/1
- description Link_to_Internal1
- ip address 10.0.0.10 255.255.255.252
+ mpls ip
+interface fa0/0
+ description Management_Port
+ ip address 198.51.100.15 255.255.255.0
  no shut
+ mpls ip
 interface fa2/0
  description Link_to_Internal2
  ip address 10.0.0.18 255.255.255.252
  no shut
+ mpls ip
+interface Loopback0
+ description Router_ID
+ ip address 1.1.1.5 255.255.255.255
+ no shut
+ mpls ip
+interface fa1/1
+ description Link_to_Internal1
+ ip address 10.0.0.10 255.255.255.252
+ no shut
+ mpls ip
 
 
 
 
 router ospf 1
-network 10.0.0.0 0.0.0.255
+network 10.0.0.0 0.0.0.255 area 0
+network 1.1.1.0 0.0.0.255 area 0
+redistribute bgp 65001
 
 router bgp 65001
-neighbor  2
-neighbor 1.1.1.1 65001
-neighbor 1.1.1.4 65001
+neighbor 11.1.1.14 remote-as 2
+neighbor 1.1.1.1 remote-as 65001
+neighbor 1.1.1.1 update-source loopback0
 
 mpls ip
+mpls label protocol ldp
 ip cef
+ip scp server enable
+snmp-server host 198.51.100.2 version 2c
+snmp-server community public rw
+snmp-server enable traps
 
 line vty 0 4
 transport input ssh
