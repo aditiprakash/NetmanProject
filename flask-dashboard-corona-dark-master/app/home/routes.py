@@ -9,7 +9,10 @@ from flask_login import login_required, current_user
 from app import login_manager
 from jinja2 import TemplateNotFound
 from app.home.routerconfig import * 
+import threading
+from app.home.collect_cpu_data import *
 import pandas
+
 
 filenames = {
     'R1': "Core_1.txt",
@@ -156,6 +159,14 @@ def deploy():
     diff = commit_all()
     return render_template("page-500.html")
 # Helper - Extract current page name from request 
+
+@blueprint.route('/cpu')
+def cpu():
+  filename = 'cpu.csv'
+  cpu_thread = threading.Thread(target=cpu_data_main, name="CPU_Utilization", args=filename)
+  cpu_thread.start()
+  
+
 def get_segment( request ): 
 
     try:

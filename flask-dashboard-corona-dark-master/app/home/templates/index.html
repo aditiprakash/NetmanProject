@@ -148,8 +148,30 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+      <a id="cpu" href="#">
+        <button type="button" class="btn btn-primary btn-fw">Monitor CPU Utilization</button>
+      </a>
+      </div>
+      </div>
     </div>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type=text/javascript>
+      $(function() {
+        $('a#cpu').on('click', function(e) {
+          e.preventDefault()
+          alert("Collecting CPU data.");
+  
+          $.getJSON('/cpu',
+              function() {
+            //do nothing
+          });
+          return false;
+        });
+      });
+  </script>
 {% endblock content %}
 
 <!-- Specific Plugin JS goes HERE  -->
