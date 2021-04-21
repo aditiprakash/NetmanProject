@@ -174,7 +174,11 @@
                         </div>
                         <div class="mr-auto text-sm-right pt-2 pt-sm-0">
                           <p class="text-muted">15 minutes ago</p>
-                          <p class="text-success">Active </p>
+                          {% if R1status == 'Offline' %}
+                          <p class="text-danger"> {{R1status}} </p>
+                          {% else %}
+                          <p class="text-success"> {{R1status}} </p>
+                          {% endif %} 
                         </div>
                       </div>
                     </div>
@@ -191,7 +195,11 @@
                         </div>
                         <div class="mr-auto text-sm-right pt-2 pt-sm-0">
                           <p class="text-muted">1 hour ago</p>
-                          <p class="text-success">Active </p>
+                          {% if R2status == 'Offline' %}
+                          <p class="text-danger"> {{R2status}} </p>
+                          {% else %}
+                          <p class="text-success"> {{R2status}} </p>
+                          {% endif %} 
                         </div>
                       </div>
                     </div>
@@ -208,7 +216,11 @@
                         </div>
                         <div class="mr-auto text-sm-right pt-2 pt-sm-0">
                           <p class="text-muted">3 minutes ago</p>
-                          <p class="text-danger">Inactive</p>
+                          {% if R3status == 'Offline' %}
+                          <p class="text-danger"> {{R3status}} </p>
+                          {% else %}
+                          <p class="text-success"> {{R3status}} </p>
+                          {% endif %} 
                         </div>
                       </div>
                     </div>
@@ -225,7 +237,11 @@
                         </div>
                         <div class="mr-auto text-sm-right pt-2 pt-sm-0">
                           <p class="text-muted">7 seconds ago</p>
-                          <p class="text-warning">Reloading </p>
+                          {% if R4status == 'Offline' %}
+                          <p class="text-danger"> {{R4status}} </p>
+                          {% else %}
+                          <p class="text-success"> {{R4status}} </p>
+                          {% endif %} 
                         </div>
                       </div>
                     </div>
@@ -242,7 +258,11 @@
                         </div>
                         <div class="mr-auto text-sm-right pt-2 pt-sm-0">
                           <p class="text-muted">10 minutes ago</p>
-                          <p class="text-success">Active </p>
+                          {% if R5status == 'Offline' %}
+                          <p class="text-danger"> {{R5status}} </p>
+                          {% else %}
+                          <p class="text-success"> {{R5status}} </p>
+                          {% endif %} 
                         </div>
                       </div>
                     </div>

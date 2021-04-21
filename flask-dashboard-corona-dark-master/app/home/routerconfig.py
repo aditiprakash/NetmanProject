@@ -6,11 +6,19 @@ import time
 import napalm
 import pickle
 import ipaddress
-
+import threading
+import subprocess
+import multiprocessing
 
 from ctypes import c_uint
 from datetime import datetime
+from concurrent.futures import as_completed
+from concurrent.futures import ThreadPoolExecutor
 from flask import render_template, redirect, url_for, request
+
+num_threads = multiprocessing.cpu_count()
+print_lock = threading.Lock()
+
 
 driver = napalm.get_network_driver("ios")
 
@@ -21,6 +29,45 @@ filenames = {
     'R4': "Edge_1.txt",
     'R5': "Edge_2.txt",
 }
+
+def Is_connected(dev, conn):
+    try:
+      conn.open()
+      conn.close()
+    except:
+      return {dev:'Offline'}
+    return {dev:'Active'}
+   
+def checkHealth():
+  devstat = ['Offline', 'Offline', 'Offline', 'Offline', 'Offline']
+  devstatus = list() 
+  devices = getCredentials()
+  try:
+    with ThreadPoolExecutor(max_workers=num_threads) as thread:
+      exe = {
+        thread.submit(
+          Is_connected, 
+          dev,
+          devices[dev] 
+        ): dev for dev in devices
+      } 
+      for item in as_completed(exe):
+        if item.result():
+          devstatus.append(item.result())
+  except Exception as e:
+    print(f"Ooops!! Something went wrong while checking router health\n{e}")
+  for d in devstatus:
+    if list(d.keys())[0] == 'R1':
+      devstat[0] = d['R1'] 
+    if list(d.keys())[0] == 'R2':
+      devstat[1] = d['R2'] 
+    if list(d.keys())[0] == 'R3':
+      devstat[2] = d['R3'] 
+    if list(d.keys())[0] == 'R4':
+      devstat[3] = d['R4'] 
+    if list(d.keys())[0] == 'R5':
+      devstat[4] = d['R5'] 
+  return devstat 
 
 def getCredentials():
   cred = dict()
@@ -91,6 +138,7 @@ def getDiff(routerName):
       dev.discard_config()
       dev.close()
     except OSError:
+      dev.close()
       pass
     except Exception as e: 
       print(f'Unable to fetch diff: \n{e}')
@@ -108,26 +156,34 @@ def commitDiff(routerName):
         print('Missing or invalid golden config file')
         return diff_comm
       dev.load_merge_candidate(filename=config_file)
-      diff_comm = dev.compare_config().replace('\n', '<br />')
-      #response += f"<p style='color:red;'>{diff_comm}</p>"
       dev.commit_config()
       dev.close()
     except OSError:
-      print("OS ERROR")
+      print(f"OSERROR: {routerName}")
+      dev.close()
       pass
     except Exception as e: 
       print(f'Unable to Commit diff: \n{e}')
-      pass  
-    return 1
+      return {routerName:0}
+    return {routerName:1}
 
 def commit_all():
+    commitstatus = list()
     try:
-      for routerName in filenames.keys():
-        if commitDiff(routerName) != 1:
-          return 0
+      with ThreadPoolExecutor(max_workers=num_threads) as thread:
+        exe = {
+          thread.submit(
+            commitDiff, 
+            routerName,
+          ): routerName for routerName in filenames.keys()
+        } 
+        for item in as_completed(exe):
+          if item.result():
+            commitstatus.append(item.result())
     except Exception as e:
-      print("Unable to commit all diffs: \n{e}")
-    return 1
+      print(f"Ooops!! Something went wrong committing all diffs:\n{e}")
+    print(commitstatus)
+    return commitstatus 
     
 
 def getOspfNeighbors(routerName):
@@ -164,10 +220,15 @@ def getBgpNeighbors(routerName):
       dev.open()
 
       bgpstr = dev.get_bgp_neighbors_detail()
-      for b in bgpstr.keys():
-        print(b)
-        print(bgpstr[b])
-
+      for b in bgpstr['global']:
+        tlist = list()
+        currdict = bgpstr['global'][b][0]
+        tlist.append(currdict['local_as'])
+        tlist.append(currdict['remote_as'])
+        tlist.append(currdict['remote_address'])
+        tlist.append(currdict['connection_state'])
+        nList.append(tlist)
+        
       dev.close()
     except OSError:
       pass

@@ -14,8 +14,21 @@ import pandas
 @blueprint.route('/index')
 @login_required
 def index():
-
-    return render_template('index.html', segment='index')
+    devstatus = checkHealth()
+    R1status = devstatus[0]
+    R2status = devstatus[1]
+    R3status = devstatus[2]
+    R4status = devstatus[3]
+    R5status = devstatus[4]
+    return render_template(
+      'index.html', 
+      segment='index',
+      R1status=R1status, 
+      R2status=R2status, 
+      R3status=R3status, 
+      R4status=R4status, 
+      R5status=R5status, 
+    )
 
 # @blueprint.route('/bgtest')
 # def bgtest():
@@ -117,13 +130,11 @@ def route_template(router,template):
 @blueprint.route('/<router>/bgtest')
 def bgtest(router):
     diff = commitDiff(router)
-    print("Worked!!")
     return render_template("page-500.html")
 
 @blueprint.route('/deploy')
 def deploy():
     diff = commit_all()
-    print("Worked!!")
     return render_template("page-500.html")
 # Helper - Extract current page name from request 
 def get_segment( request ): 
