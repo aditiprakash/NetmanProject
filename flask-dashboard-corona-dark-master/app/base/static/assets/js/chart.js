@@ -157,11 +157,19 @@ $(function () {
       yAxes: [{
         gridLines: {
           color: "rgba(204, 204, 204,0.1)"
+        },
+        ticks: {
+          fontColor: "white",
+          fontSize: 12
         }
       }],
       xAxes: [{
         gridLines: {
           color: "rgba(204, 204, 204,0.1)"
+        },
+        ticks: {
+          fontColor: "white",
+          fontSize: 12
         }
       }]
     }
