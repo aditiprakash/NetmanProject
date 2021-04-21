@@ -14,7 +14,7 @@ except:
 
 
 serverSocket = socket(AF_INET,SOCK_DGRAM)
-trapPort = 162
+trapPort = 1620
 serverSocket.bind(("198.51.100.2",trapPort))
 
 while True:
