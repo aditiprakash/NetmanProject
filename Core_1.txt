@@ -48,7 +48,7 @@ mpls ip
 mpls label protocol ldp
 ip cef
 ip scp server enable
-snmp-server host 198.51.100.2 version 2c
+snmp-server host 198.51.100.2 version 2c public
 snmp-server community public rw
 snmp-server enable traps
 
