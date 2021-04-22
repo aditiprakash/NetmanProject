@@ -162,8 +162,8 @@ def deploy():
 
 @blueprint.route('/cpu')
 def cpu():
-  filename = 'cpu.csv'
-  cpu_thread = threading.Thread(target=cpu_data_main, name="CPU_Utilization", args=filename)
+  # filename = 'cpu.csv'
+  cpu_thread = threading.Thread(target=cpu_data_main, name="CPU_Utilization")
   cpu_thread.start()
   return render_template("page-500.html")
 

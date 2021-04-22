@@ -17,7 +17,8 @@ def get_cpu(device_list): # get current cpu utilization of all devices
         return cpu_data
 
 
-def cpu_data_main(filename):
+def cpu_data_main():
+    filename = 'cpu.csv'
     if not path.exists(filename):
         with open(filename,'w') as f:
             header = ['R1','R2','R3','R4','R5']
