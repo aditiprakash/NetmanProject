@@ -18,7 +18,7 @@ def get_cpu(device_list): # get current cpu utilization of all devices
 
 
 def cpu_data_main():
-    filename = '/app/home/cpu.csv'
+    filename = 'app/home/cpu.csv'
     if not path.exists(filename):
         with open(filename,'w') as f:
             header = ['R1','R2','R3','R4','R5']
@@ -28,12 +28,14 @@ def cpu_data_main():
         
     device_list = ['198.51.100.11','198.51.100.12','198.51.100.13','198.51.100.14','198.51.100.15']
     # try:
-    with open(filename,'a') as f: # collect cpu data every 5 seconds and add to cpu.csv
-        writer_f = writer(f)
-        while True:
+    while True:
+        with open(filename,'a') as f: # collect cpu data every 5 seconds and add to cpu.csv
+            writer_f = writer(f)
             new_data = get_cpu(device_list)
+            print(new_data)
             writer_f.writerow(new_data)
-            time.sleep(5)
+            f.close()
+        time.sleep(5)
 # except:
 #     print("Configure SNMPv2c on managed devices first.")
 
