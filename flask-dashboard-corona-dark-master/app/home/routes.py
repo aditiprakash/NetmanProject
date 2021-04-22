@@ -165,7 +165,7 @@ def cpu():
   filename = 'cpu.csv'
   cpu_thread = threading.Thread(target=cpu_data_main, name="CPU_Utilization", args=filename)
   cpu_thread.start()
-  
+  return render_template("page-500.html")
 
 def get_segment( request ): 
 
