@@ -31,11 +31,11 @@ filenames = {
 }
 
 def Is_connected(dev, conn):
+    now = datetime.now()
+    timestr = now.strftime("%c")
     try:
       conn.open()
       conn.close()
-      now = datetime.now()
-      timestr = now.strftime("%c")
     except:
       return {
         dev:'Offline',
