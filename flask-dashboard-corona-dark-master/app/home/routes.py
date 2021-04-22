@@ -10,7 +10,8 @@ from app import login_manager
 from jinja2 import TemplateNotFound
 from app.home.routerconfig import * 
 import threading
-from app.home.collect_cpu_data import *
+# from app.home.collect_cpu_data import *
+from app.home.listen_to_trap import *
 import pandas
 
 
@@ -165,6 +166,12 @@ def cpu():
   # filename = 'cpu.csv'
   cpu_thread = threading.Thread(target=cpu_data_main, name="CPU_Utilization")
   cpu_thread.start()
+  return render_template("page-500.html")
+
+@blueprint.route('/trap')
+def trap():
+  trap_thread = threading.Thread(target=trap_main, name="Monitor_Traps")
+  trap_thread.start()
   return render_template("page-500.html")
 
 def get_segment( request ): 

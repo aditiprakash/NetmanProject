@@ -153,11 +153,12 @@
       <a id="cpu" href="#">
         <button type="button" class="btn btn-primary btn-fw">Monitor CPU Utilization</button>
       </a>
-<!-- 
-    <br>
-    <button type="button" class="btn btn-info btn-fw" style="float: right;">Collect Traps</button> -->
-
       </div>
+      <div class="col-2 grid-margin stretch-card">
+        <a id="trap" href="#">
+      <button type="button" class="btn btn-info btn-fw">Monitor Traps</button>
+    </a>
+    </div>
       </div>
     </div>
 
@@ -169,6 +170,16 @@
           alert("Collecting CPU data.");
   
           $.getJSON('/cpu',
+              function() {
+            //do nothing
+          });
+          return false;
+        });
+        $('a#trap').on('click', function(e) {
+          e.preventDefault()
+          alert("Enabled Traps. Email notification will be sent.");
+  
+          $.getJSON('/trap',
               function() {
             //do nothing
           });
