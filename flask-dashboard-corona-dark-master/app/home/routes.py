@@ -10,7 +10,7 @@ from app import login_manager
 from jinja2 import TemplateNotFound
 from app.home.routerconfig import * 
 import threading
-# from app.home.collect_cpu_data import *
+from app.home.collect_cpu_data import *
 from app.home.listen_to_trap import *
 import pandas
 
